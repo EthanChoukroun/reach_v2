@@ -18,7 +18,7 @@ services:
       - ./backend:/app
     environment:
       - ML_SERVER_URL=http://localhost:8001
-    command: start -b 0.0.0.0
+      - LOCO_ENV=development
     depends_on:
       - postgres
     network_mode: "host"

@@ -96,7 +96,7 @@ server:
     # for use with the view_engine in initializers/view_engine.rs
     # (server-block-start)
     static:
-      enable: false
+      enable: true
       must_exist: true
       folder:
         uri: "/"
