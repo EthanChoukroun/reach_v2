@@ -1,0 +1,40 @@
+services:
+  smart:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    volumes:
+      - ./python:/app
+    ports:
+      - "8001:8000"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+    environment:
+      - ML_SERVER_URL=http://localhost:8001
+    command: start -b 0.0.0.0
+    depends_on:
+      - postgres
+    network_mode: "host"
+
+
+  postgres:
+    image: postgres:15.3-alpine  # You can specify the version of PostgreSQL
+    container_name: postgres_reach
+    environment:
+      POSTGRES_USER: loco       # Change this to your preferred username
+      POSTGRES_PASSWORD: loco  # Change this to your preferred password
+      POSTGRES_DB: reach     # The database to be created
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port to your host
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist database data to a named volume
+
+volumes:
+  postgres_data:
