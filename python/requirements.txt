@@ -1,3 +1,4 @@
 pandas
 numpy
 fastapi[standard]==0.115.0
+requests

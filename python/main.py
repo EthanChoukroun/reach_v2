@@ -1,11 +1,8 @@
-from fastapi import FastAPI
+import transactions
 
-app = FastAPI()
+def main():
+    transactions.get_transactions("ethan.chkrn@gmail.com")
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+if __name__ == "__main__":
+    main()
 
-@app.post("/")
-def calculate_budget():
-    return {"Hello": "World"}
