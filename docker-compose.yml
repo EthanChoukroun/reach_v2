@@ -5,37 +5,16 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./python:/app
-    depends_on:
-      - backend
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    volumes:
-      - ./backend:/app
-    environment:
-      - DATABASE_URL=postgres_url
-      - LOCO_ENV=development
-      - PLAID_ENV=production
-      - PLAID_CLIENT_ID=client_id
-      - PLAID_SECRET=secret
-      - PLAID_VERSION=2020-09-14
-    depends_on:
-      - postgres
     ports:
-      - "80:80"
+      - "8000:8000"
 
 
-  postgres:
-    image: postgres:15.3-alpine  # You can specify the version of PostgreSQL
-    container_name: postgres_reach
+  ngrok:
+    image: ngrok/ngrok:latest
+    command:
+      - "http"
+      - "http://host.docker.internal:8000"
     environment:
-      POSTGRES_USER: loco       # Change this to your preferred username
-      POSTGRES_PASSWORD: loco  # Change this to your preferred password
-      POSTGRES_DB: reach     # The database to be created
-    volumes:
-      - postgres_data:/var/lib/postgresql/data  # Persist database data to a named volume
-
-volumes:
-  postgres_data:
+      NGROK_AUTHTOKEN: 2lTdPoWwaWEaxrgl8Jr0p4E7Rnk_44vMgHsR5VPMAVn8N1eMY
+    ports:
+      - 4040:4040
