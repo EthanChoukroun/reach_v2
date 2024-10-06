@@ -3,7 +3,7 @@ import requests
 
 def get_transactions(user):
     # Define the URL
-    url = "http://localhost/api/plaid/transactions"
+    url = "https://reach.shuttleapp.rs/api/plaid/transactions"
 
     params = {
         "email": user # Example query parameter
