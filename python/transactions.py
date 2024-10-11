@@ -12,4 +12,4 @@ def get_transactions(user):
 # Make a GET request
     response = requests.get(url, params=params)
 
-    print(response.text)
+    return response.text
