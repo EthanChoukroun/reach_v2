@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from pydantic import BaseModel
+# from pydantic import BaseModel
 from typing import List
 import main
 import transactions
@@ -8,10 +8,10 @@ import numpy as np
 # app = FastAPI()
 app = Flask(__name__)
 
-class Transaction(BaseModel):
-    date: str
-    amount: float
-    name: str
+# class Transaction(BaseModel):
+#     date: str
+#     amount: float
+#     name: str
 
 # @app.get("/")
 @app.route("/", methods=['GET'])
