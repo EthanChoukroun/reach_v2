@@ -13,3 +13,5 @@ def get_transactions(user):
     response = requests.get(url, params=params)
 
     return response.text
+
+# print(get_transactions("josesm82@gmail.com"))
