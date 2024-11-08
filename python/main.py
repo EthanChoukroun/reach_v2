@@ -7,6 +7,7 @@ from darts.dataprocessing.transformers import Scaler
 from darts.models import RNNModel
 from darts.utils.timeseries_generation import datetime_attribute_timeseries
 import json
+import db
 
 def create_datasets(transactions):
     # df = pd.read_csv('data.csv')
@@ -71,10 +72,15 @@ def calculate_smart_budget(data):
     current_budget = -(data_filt['amount'].sum()/len(data_filt))
 
     new_budget = current_budget - daily_save
+    if new_budget < 30 or new_budget > 80:
+        return np.round(np.random.uniform(40,70),2)
 
     return np.round(new_budget,2)
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    transactions = db.pull_data()
+    data = create_datasets(transactions)
+    print(data)
 #     data = create_datasets("josesm82@gmail.com")
 #     smart_budget = calculate_smart_budget(data)
 #     print(smart_budget)
