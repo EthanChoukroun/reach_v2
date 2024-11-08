@@ -29,7 +29,7 @@ def calculate_budget():
         smart_budget = main.calculate_smart_budget(data)
         if np.isnan(smart_budget):
             return jsonify({'message': "Smart budget unavailable"})
-        return jsonify({'message': f"Your smart budget is ${smart_budget}"})
+        return jsonify({"smart_budget"})
     
     except Exception as e:
         return jsonify({'message': 'The smart budget unavailable'}), 500
