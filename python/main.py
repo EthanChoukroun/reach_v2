@@ -7,7 +7,7 @@ from darts.dataprocessing.transformers import Scaler
 from darts.models import RNNModel
 from darts.utils.timeseries_generation import datetime_attribute_timeseries
 import json
-import db
+# import db
 
 def create_datasets(transactions):
     # df = pd.read_csv('data.csv')
