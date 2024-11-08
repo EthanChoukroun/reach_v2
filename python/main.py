@@ -77,10 +77,7 @@ def calculate_smart_budget(data):
 
     return np.round(new_budget,2)
 
-if __name__ == "__main__":
-    transactions = db.pull_data()
-    data = create_datasets(transactions)
-    print(data)
+
 #     data = create_datasets("josesm82@gmail.com")
 #     smart_budget = calculate_smart_budget(data)
 #     print(smart_budget)
