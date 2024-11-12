@@ -30,7 +30,7 @@ def create_datasets(transactions):
     # df_train = df_indexed[df_indexed['Date'].dt.year == 2023]
     # df_train['AccountBalance'] = df_train['AccountBalance'] + min(df_train['AccountBalance'])
     df_test = df_indexed[df_indexed['Date'] >= (df_indexed['Date'].iloc[-1] - pd.DateOffset(months=6))]
-    df_test['AccountBalance'] = df_test['AccountBalance'] - min(df_test['AccountBalance'])
+    df_test.loc[:, 'AccountBalance'] = df_test['AccountBalance'] - df_test['AccountBalance'].min()
     return df_test
 
 
