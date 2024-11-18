@@ -74,8 +74,8 @@ def calculate_smart_budget(data):
     new_budget = current_budget - daily_save
     if new_budget < 30 or new_budget > 80:
         return np.round(np.random.uniform(40,70),2)
-
-    return np.round(new_budget,2)
+    total_save = np.round(daily_save * 365)
+    return np.round(new_budget,2), total_save
 
 
 #     data = create_datasets("josesm82@gmail.com")
