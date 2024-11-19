@@ -32,7 +32,7 @@ def calculate_budget():
         return jsonify({"smart_budget":smart_budget,"total_save":total_save})
     
     except Exception as e:
-        return jsonify({'message': 'The smart budget unavailable'}), 500
+        return jsonify({'message_error': e}), 500
 
 
 if __name__ == "__main__":
