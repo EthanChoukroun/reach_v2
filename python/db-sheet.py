@@ -33,7 +33,10 @@ def pull_data(user_id=None, table_name=None):
     )
 
     # Build the query
-    query = f"SELECT * FROM {table_name}"
+    if table_name == 'transactions':
+        query = "SELECT created_at, amount, date, id, transaction_id, updated_at, user_id FROM transactions"
+    else:
+        query = f"SELECT * FROM {table_name}"
     if user_id and user_id.lower() != "all":
         query += f" WHERE user_id = {user_id}"
 
