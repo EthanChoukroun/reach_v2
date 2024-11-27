@@ -7,32 +7,41 @@ def pull_data():
     try:
         connection = psycopg2.connect(
             dbname=url.path[1:],
-            user = url.username,
-            password = url.password,
-            host = url.hostname,
-            port = url.port
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
         )
-        print("connection successful")
+        print("Connection successful")
 
     except Exception as e:
         print(e)
+        return None
 
+    query = "SELECT * FROM smart_budgets WHERE user_id = 92"
 
-    query = "SELECT * FROM transactions"
+    try:
+        cursor = connection.cursor()
+        cursor.execute(query)
+        
+        # Fetch column names
+        column_names = [desc[0] for desc in cursor.description]
+        
+        # Fetch all rows
+        results = cursor.fetchall()
+        
+    except Exception as e:
+        print(e)
+        return None
 
-    cursor = connection.cursor()
-    cursor.execute(query)
+    finally:
+        if connection:
+            connection.close()
 
-    results = cursor.fetchall()
-    if connection:
-        connection.close()
+    # Return data as DataFrame with column names
+    return pd.DataFrame(results, columns=column_names)
 
-    return results
-# print(results)
-
-
-tr = pull_data()
-df = pd.DataFrame(tr)
-print(df.iloc[0])
-
-
+# Pull data and display as DataFrame
+df = pull_data()
+if df is not None:
+    print(df)

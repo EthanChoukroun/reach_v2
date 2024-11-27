@@ -80,7 +80,7 @@ def calculate_smart_budget(data):
 
 
 #     data = create_datasets("josesm82@gmail.com")
-#     smart_budget = calculate_smart_budget(data)
+#     smart_budget = calculate_smart_budget(data)   
 #     print(smart_budget)
 
 
