@@ -19,8 +19,8 @@ def pull_data(user_id=None, table_name=None):
     Returns:
         list of dict: The result rows as a list of dictionaries.
     """
-    if table_name not in ["transactions", "smart_budget"]:
-        raise ValueError("Invalid table name. Must be 'transactions' or 'smart_budget'.")
+    if table_name not in ["transactions", "smart_budgets"]:
+        raise ValueError("Invalid table name. Must be 'transactions' or 'smart_budgets'.")
 
     # Parse DB URL
     url = urlparse(DB_URL)
