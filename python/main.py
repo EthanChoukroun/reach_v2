@@ -18,6 +18,9 @@ def create_datasets(transactions):
     df['amount'] = pd.to_numeric(df['amount'], errors='coerce')
     # df = df.drop('Unnamed: 0', axis=1)
     df['Date'] = pd.to_datetime(df['date'])
+    df['YearMonth'] = df['Date'].dt.to_period('M')
+    monthly_net = df.groupby('YearMonth')['amount'].sum()
+    total_net = monthly_net.sum()
     percentile_95 = df['amount'].abs().quantile(1)
     df_filtered = df[df['amount'].abs() <= percentile_95]
     # df_train = df_filtered[df_filtered['Date'].dt.year == 2023]
@@ -31,7 +34,7 @@ def create_datasets(transactions):
     # df_train['AccountBalance'] = df_train['AccountBalance'] + min(df_train['AccountBalance'])
     df_test = df_indexed[df_indexed['Date'] >= (df_indexed['Date'].iloc[-1] - pd.DateOffset(months=6))]
     df_test.loc[:, 'AccountBalance'] = df_test['AccountBalance'] - df_test['AccountBalance'].min()
-    return df_test
+    return df_test, monthly_net
 
 
 def calculate_smart_budget(data):
