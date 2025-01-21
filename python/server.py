@@ -29,7 +29,7 @@ def calculate_budget():
         smart_budget, total_save = main.calculate_smart_budget(data)
         if np.isnan(smart_budget):
             return jsonify({'message': "Smart budget unavailable"})
-        print(smart_budget, total_save)
+        print(smart_budget, total_save, monthly_net)
         return jsonify({"smart_budget":smart_budget,"total_save":total_save, 'total_saved':monthly_net})
     
     except Exception as e:
