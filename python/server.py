@@ -22,7 +22,7 @@ def read_root():
 def calculate_budget():
     transactions = request.json
     if not transactions:
-        return jsonify({"error": "No transactions provided"}), 400\
+        return jsonify({"error": "No transactions provided"}), 400
         
     try:
         data, monthly_net = main.create_datasets(transactions)
@@ -30,7 +30,15 @@ def calculate_budget():
         if np.isnan(smart_budget):
             return jsonify({'message': "Smart budget unavailable"})
         print(smart_budget, total_save, monthly_net)
-        return jsonify({"smart_budget":smart_budget,"total_save":total_save, 'total_saved':monthly_net})
+        
+        # Convert monthly_net to JSON-serializable format
+        monthly_net_dict = monthly_net.to_dict()
+        
+        return jsonify({
+            "smart_budget": smart_budget,
+            "total_save": total_save,
+            "total_saved": monthly_net_dict
+        })
     
     except Exception as e:
         return jsonify({'message_error': str(e)}), 500
