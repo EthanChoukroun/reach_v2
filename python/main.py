@@ -20,6 +20,7 @@ def create_datasets(transactions):
     df['Date'] = pd.to_datetime(df['date'])
     df['YearMonth'] = df['Date'].dt.to_period('M')
     monthly_net = df.groupby('YearMonth')['amount'].sum()
+    monthly_net.index = monthly_net.index.astype(str)  # Convert PeriodIndex to string
     total_net = monthly_net.sum()
     percentile_95 = df['amount'].abs().quantile(1)
     df_filtered = df[df['amount'].abs() <= percentile_95]
